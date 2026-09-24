@@ -8,6 +8,10 @@
         :root {
             color-scheme: light dark;
         }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 24px;
+        }
         body {
             font-family:
                 -apple-system,
@@ -19,17 +23,55 @@
                 sans-serif;
             line-height: 1.7;
             margin: 0;
-            padding: 0;
             color: #333;
             background: #f5f5f7;
         }
-        main {
-            max-width: 760px;
+        .layout {
+            display: flex;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 48px 20px 64px;
+            min-height: 100vh;
+        }
+        /* Sidebar */
+        aside {
+            width: 220px;
+            flex-shrink: 0;
+            padding: 48px 24px;
+            box-sizing: border-box;
+        }
+        .site-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 32px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        nav li {
+            margin: 0;
+        }
+        nav a {
+            display: block;
+            padding: 6px 0;
+            color: #333;
+            text-decoration: none;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        nav .sub-item {
+            padding-left: 16px;
+            font-size: 15px;
+        }
+        /* Main */
+        main {
+            flex: 1;
+            padding: 48px 32px 64px;
+            min-width: 0;
         }
         header {
-            text-align: center;
             margin-bottom: 48px;
         }
         header h1 {
@@ -41,14 +83,22 @@
             margin: 0;
             color: #666;
         }
+        section {
+            margin-bottom: 64px;
+            scroll-margin-top: 24px;
+        }
+        section > h2 {
+            font-size: 24px;
+            line-height: 1.4;
+            margin: 0 0 24px;
+        }
+        /* App */
         .app {
             background: #fff;
             border-radius: 20px;
             padding: 28px;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
-        .app-header {
-            margin-bottom: 24px;
+            scroll-margin-top: 24px;
         }
         .app-name {
             font-size: 26px;
@@ -81,27 +131,22 @@
             margin-top: 28px;
             padding-top: 22px;
         }
-        .links h2 {
+        .links h3 {
             font-size: 17px;
             margin: 0 0 14px;
         }
-        .link-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 18px;
-        }
-        .link-group a {
+        .legal-link {
+            display: block;
+            margin: 8px 0;
             color: inherit;
             text-underline-offset: 3px;
         }
+        /* Contact */
         .contact {
-            border-top: 1px solid #ddd;
-            margin-top: 28px;
-            padding-top: 22px;
-        }
-        .contact h2 {
-            font-size: 17px;
-            margin: 0 0 10px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
         .contact p {
             margin: 0;
@@ -116,6 +161,7 @@
             color: #888;
             font-size: 14px;
         }
+        /* Dark mode */
         @media (prefers-color-scheme: dark) {
             body {
                 color: #eee;
@@ -124,15 +170,18 @@
             header p {
                 color: #aaa;
             }
-            .app {
+            nav a {
+                color: #eee;
+            }
+            .app,
+            .contact {
                 background: #1c1c1e;
                 box-shadow: none;
             }
             .app-name-en {
                 color: #999;
             }
-            .links,
-            .contact {
+            .links {
                 border-color: #444;
             }
             .store-button {
@@ -142,47 +191,88 @@
                 color: #888;
             }
         }
+        /* Mobile */
+        @media (max-width: 700px) {
+            .layout {
+                display: block;
+            }
+            aside {
+                width: auto;
+                padding: 24px 20px 0;
+            }
+            .site-title {
+                margin-bottom: 16px;
+            }
+            nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px 16px;
+            }
+            nav .sub-item {
+                padding-left: 0;
+            }
+            main {
+                padding: 32px 20px 56px;
+            }
+            header {
+                margin-bottom: 36px;
+            }
+            header h1 {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
-<main>
-    <header>
-        <h1>Apps</h1>
-        <p>Apps developed by Naoya Hontani</p>
-    </header>
-    <section class="app">
-        <div class="app-header">
-            <h2 class="app-name">なんでもタイマー</h2>
-            <p class="app-name-en">AnythingTimer</p>
-            <p class="description">
-                筋トレ、ストレッチ、料理、勉強など、さまざまな用途に使えるタイマーアプリです。
-                自分だけのタイマーを作成して、いつでもすぐに使うことができます。
-            </p>
-            <a class="store-button" href="APP_STORE_URL">
-                App Storeで見る
-            </a>
-        </div>
-        <div class="links">
-            <h2>Legal</h2>
-            <div class="link-group">
-                <a href="https://book0418.github.io/app-legal/anything-timer/privacy.html">プライバシーポリシー（日本語）</a>
-                <a href="https://book0418.github.io/app-legal/anything-timer/privacy-en.html">Privacy Policy (English)</a>
-                <a href="https://book0418.github.io/app-legal/anything-timer/terms.html">利用規約（日本語）</a>
-                <a href="https://book0418.github.io/app-legal/anything-timer/terms-en.html">Terms of Use (English)</a>
-            </div>
-        </div>
-        <div class="contact">
+<div class="layout">
+    <aside>
+        <div class="site-title">Naoya Hontani</div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="#apps">アプリ一覧</a>
+                </li>
+                <li>
+                    <a class="sub-item" href="#anything-timer">なんでもタイマー</a>
+                </li>
+                <li>
+                    <a href="#contact">お問い合わせ</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main>
+        <header>
+            <h1>アプリ一覧</h1>
+            <p>Naoya Hontaniが開発・提供するアプリをご紹介します。</p>
+        </header>
+        <section id="apps">
+            <h2>アプリ一覧</h2>
+            <article class="app" id="anything-timer">
+                <h3 class="app-name">なんでもタイマー</h3>
+                <p class="app-name-en">AnythingTimer</p>
+                <p class="description">筋トレ、ストレッチ、料理、勉強など、さまざまな用途に使えるタイマーアプリです。自分だけのタイマーを作成して、いつでもすぐに使うことができます。</p>
+                <a class="store-button" href="APP_STORE_URL">App Storeで見る</a>
+                <div class="links">
+                    <h3>規約・プライバシー</h3>
+                    <a class="legal-link" href="https://book0418.github.io/app-legal/anything-timer/privacy.html">プライバシーポリシー（日本語）</a>
+                    <a class="legal-link" href="https://book0418.github.io/app-legal/anything-timer/privacy-en.html">Privacy Policy（English）</a>
+                    <a class="legal-link" href="https://book0418.github.io/app-legal/anything-timer/terms.html">利用規約（日本語）</a>
+                    <a class="legal-link" href="https://book0418.github.io/app-legal/anything-timer/terms-en.html">Terms of Use（English）</a>
+                </div>
+            </article>
+        </section>
+        <section id="contact">
             <h2>お問い合わせ</h2>
-            <p>
-                アプリに関するお問い合わせは
-                <a href="mailto:book.0418@gmail.com">book.0418@gmail.com</a>
-                までご連絡ください。
-            </p>
-        </div>
-    </section>
-    <footer>
-        <p>© 2026 Naoya Hontani</p>
-    </footer>
-</main>
+            <div class="contact">
+                <p>アプリに関するお問い合わせは<a href="mailto:book.0418@gmail.com">book.0418@gmail.com</a>までご連絡ください。
+                </p>
+            </div>
+        </section>
+        <footer>
+            <p>© 2026 Naoya Hontani</p>
+        </footer>
+    </main>
+</div>
 </body>
 </html>
